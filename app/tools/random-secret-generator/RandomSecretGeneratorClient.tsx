@@ -32,10 +32,10 @@ export default function RandomSecretGeneratorClient() {
       keywords={['random secret generator', 'crypto random generator', 'base64 secret generator']}
     >
       <div className="space-y-6">
-        {/* Controls Card */}
+        {}
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground">
           <div className="space-y-4">
-            {/* Format */}
+            {}
             <div className="space-y-2">
               <label className="text-sm font-medium">Output Format</label>
               <ToggleGroup type="single" value={format} onValueChange={(val) => val && setFormat(val as SecretFormat)}>
@@ -44,7 +44,7 @@ export default function RandomSecretGeneratorClient() {
               </ToggleGroup>
             </div>
 
-            {/* Size */}
+            {}
             <div className="space-y-2">
               <label className="text-sm font-medium">Size</label>
               <ToggleGroup type="single" value={bytes.toString()} onValueChange={(val) => val && setBytes(parseInt(val))}>
@@ -62,7 +62,7 @@ export default function RandomSecretGeneratorClient() {
           </div>
         </div>
 
-        {/* Output Card */}
+        {}
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground">
           <div className="space-y-4">
             <div className="flex justify-between items-center">
@@ -79,14 +79,6 @@ export default function RandomSecretGeneratorClient() {
             </div>
             <OutputDisplay value={secret} />
           </div>
-        </div>
-
-        {/* Info Section */}
-        <div className="border border-border rounded-lg p-4 bg-muted/30">
-          <p className="text-sm font-medium mb-1">Node.js equivalent:</p>
-          <pre className="text-xs text-muted-foreground font-mono">
-            require(&apos;crypto&apos;).randomBytes({bytes}).toString(&apos;{format}&apos;)
-          </pre>
         </div>
       </div>
     </ToolPageLayout>

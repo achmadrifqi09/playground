@@ -53,7 +53,6 @@ export function generatePassword(options: PasswordOptions): GeneratedPassword {
     }
   }
 
-  // Shuffle using Fisher-Yates with crypto random
   shuffleArray(passwordArray);
 
   const value = passwordArray.join('');

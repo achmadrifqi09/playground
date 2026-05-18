@@ -1,7 +1,7 @@
 export type SecretFormat = 'base64' | 'hex';
 
 export interface GenerateSecretOptions {
-  bytes: number; // Jumlah bytes: 16 | 32 | 48 | 64
+  bytes: number;
   format: SecretFormat;
 }
 
@@ -13,7 +13,7 @@ export interface GeneratedSecret {
 }
 
 export interface PasswordOptions {
-  length: number; // 8–128
+  length: number;
   uppercase: boolean;
   lowercase: boolean;
   numbers: boolean;
@@ -22,7 +22,7 @@ export interface PasswordOptions {
 
 export interface GeneratedPassword {
   value: string;
-  entropy: number; // Bits of entropy
+  entropy: number;
   options: PasswordOptions;
 }
 

@@ -10,7 +10,6 @@ export function generateSecret(options: GenerateSecretOptions): GeneratedSecret 
 
   let value = '';
   if (options.format === 'base64') {
-    // PRD suggestion: btoa(String.fromCharCode(...array))
     value = btoa(String.fromCharCode(...Array.from(array)));
   } else if (options.format === 'hex') {
     value = Array.from(array)

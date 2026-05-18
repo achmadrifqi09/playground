@@ -61,4 +61,14 @@ export const TOOLS: ToolMeta[] = [
     keywords: ['sha256 generator', 'sha256 hash online'],
     quickActionLabel: 'Generate →',
   },
+  {
+    id: 'json-php-converter',
+    name: 'JSON ⇄ PHP Array Converter',
+    description: 'Convert JSON to PHP Array and vice versa',
+    category: 'utility',
+    href: '/tools/json-php-converter',
+    icon: 'RefreshCw',
+    keywords: ['json to php array', 'php array to json', 'php array converter'],
+    quickActionLabel: 'Convert →',
+  },
 ];

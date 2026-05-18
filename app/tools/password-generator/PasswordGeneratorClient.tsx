@@ -58,10 +58,10 @@ export default function PasswordGeneratorClient() {
       keywords={['secure password generator', 'random password generator', 'online password generator']}
     >
       <div className="space-y-6">
-        {/* Controls Card */}
+        {}
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground">
           <div className="space-y-4">
-            {/* Length */}
+            {}
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium">Length: {options.length}</label>
@@ -83,7 +83,7 @@ export default function PasswordGeneratorClient() {
               />
             </div>
 
-            {/* Character Sets */}
+            {}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center space-x-2">
                 <Checkbox
@@ -136,7 +136,7 @@ export default function PasswordGeneratorClient() {
           </div>
         </div>
 
-        {/* Output Card */}
+        {}
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground">
           <div className="space-y-4">
             <div className="flex justify-between items-center">
@@ -145,7 +145,7 @@ export default function PasswordGeneratorClient() {
             </div>
             <OutputDisplay value={password} />
 
-            {/* Entropy */}
+            {}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
                 <span>Entropy: {entropy.toFixed(1)} bits</span>

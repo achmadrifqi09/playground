@@ -10,6 +10,7 @@ interface ToolPageLayoutProps {
   category: ToolCategory;
   keywords: string[];
   children: React.ReactNode;
+  maxWidth?: string;
 }
 
 export default function ToolPageLayout({
@@ -18,10 +19,11 @@ export default function ToolPageLayout({
   category,
   keywords,
   children,
+  maxWidth = "max-w-2xl",
 }: ToolPageLayoutProps) {
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
-      {/* Breadcrumb */}
+    <div className={`${maxWidth} mx-auto px-4 py-8`}>
+      {}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
         <Link href="/" className="hover:text-foreground transition-colors">
           Home
@@ -34,17 +36,17 @@ export default function ToolPageLayout({
         <span className="text-foreground font-medium">{title}</span>
       </nav>
 
-      {/* Header */}
+      {}
       <div className="space-y-4 mb-8">
         <CategoryBadge category={category} />
         <h1 className="text-3xl font-bold text-foreground">{title}</h1>
         <p className="text-muted-foreground">{description}</p>
       </div>
 
-      {/* Content */}
+      {}
       <div>{children}</div>
 
-      {/* JSON-LD Schema */}
+      {}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

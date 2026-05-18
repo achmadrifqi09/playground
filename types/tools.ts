@@ -6,7 +6,7 @@ export interface ToolMeta {
   description: string;
   category: ToolCategory;
   href: string;
-  icon: string; // Nama lucide-react icon
-  keywords: string[]; // Untuk SEO meta
+  icon: string;
+  keywords: string[];
   quickActionLabel: string;
 }

@@ -11,11 +11,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { generateRandomBase64, encodeToBase64, decodeFromBase64 } from '@/lib/crypto/base64';
 
 export default function Base64GeneratorClient() {
-  // Generate Tab State
   const [bytes, setBytes] = useState(32);
   const [generatedBase64, setGeneratedBase64] = useState('');
 
-  // Encode/Decode Tab State
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [error, setError] = useState('');
@@ -60,7 +58,7 @@ export default function Base64GeneratorClient() {
           <TabsTrigger value="encode-decode">Encode / Decode</TabsTrigger>
         </TabsList>
 
-        {/* Generate Tab */}
+        {}
         <TabsContent value="generate" className="space-y-6 mt-4">
           <div className="border border-border rounded-lg p-6 bg-card text-card-foreground space-y-4">
             <div className="space-y-2">
@@ -89,7 +87,7 @@ export default function Base64GeneratorClient() {
           )}
         </TabsContent>
 
-        {/* Encode/Decode Tab */}
+        {}
         <TabsContent value="encode-decode" className="space-y-6 mt-4">
           <div className="border border-border rounded-lg p-6 bg-card text-card-foreground space-y-4">
             <div className="space-y-2">

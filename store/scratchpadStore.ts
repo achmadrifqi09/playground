@@ -6,6 +6,8 @@ import { saveTabs, loadTabs } from '@/lib/storage/scratchpadStorage';
 interface ScratchpadStore {
   tabs: Tab[];
   activeTabId: string | null;
+  isDirty: boolean;
+  isLoaded: boolean;
   addTab: (type: WorkspaceType) => void;
   removeTab: (tabId: string) => void;
   setActiveTab: (tabId: string) => void;
@@ -13,7 +15,9 @@ interface ScratchpadStore {
   renameTab: (tabId: string, label: string) => void;
   clearTabContent: (tabId: string) => void;
   reopenTab: (tabId: string) => void;
+  deleteTab: (tabId: string) => void;
   loadFromStorage: () => Promise<void>;
+  flushSave: () => void;
 }
 
 let saveTimeout: NodeJS.Timeout | null = null;
@@ -26,9 +30,24 @@ const defaultContent: Record<WorkspaceType, string> = {
   notes: '# Notes\nWrite something here...',
 };
 
+const saveBackup = (tabs: Tab[]) => {
+  if (typeof window !== 'undefined') {
+    try {
+      const str = JSON.stringify(tabs);
+      if (str.length < 2 * 1024 * 1024) {
+        localStorage.setItem('scratchpad_tabs_backup', str);
+      }
+    } catch (e) {
+      console.warn('Failed to save backup to localStorage', e);
+    }
+  }
+};
+
 export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
   tabs: [],
   activeTabId: null,
+  isDirty: false,
+  isLoaded: false,
 
   addTab: (type: WorkspaceType) => {
     const newTab: Tab = {
@@ -42,6 +61,7 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
     set((state) => {
       const newTabs = [...state.tabs, newTab];
       saveTabs(newTabs);
+      saveBackup(newTabs);
       return {
         tabs: newTabs,
         activeTabId: newTab.id,
@@ -59,7 +79,6 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
       let newTabs;
       let newActiveTabId = state.activeTabId;
 
-      // If this was the last open tab, create a new one of the same type
       if (openTabs.length === 0) {
         const newTab: Tab = {
           id: uuidv4(),
@@ -83,6 +102,7 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
       }
 
       saveTabs(newTabs);
+      saveBackup(newTabs);
       return {
         tabs: newTabs,
         activeTabId: newActiveTabId,
@@ -98,12 +118,15 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
         t.id === tabId ? { ...t, content, updatedAt: Date.now() } : t
       );
 
+      saveBackup(newTabs);
+
       if (saveTimeout) clearTimeout(saveTimeout);
       saveTimeout = setTimeout(() => {
         saveTabs(newTabs);
+        set({ isDirty: false });
       }, 500);
 
-      return { tabs: newTabs };
+      return { tabs: newTabs, isDirty: true };
     });
   },
 
@@ -113,6 +136,7 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
         t.id === tabId ? { ...t, label, updatedAt: Date.now() } : t
       );
       saveTabs(newTabs);
+      saveBackup(newTabs);
       return { tabs: newTabs };
     });
   },
@@ -123,6 +147,7 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
         t.id === tabId ? { ...t, content: '', updatedAt: Date.now() } : t
       );
       saveTabs(newTabs);
+      saveBackup(newTabs);
       return { tabs: newTabs };
     });
   },
@@ -133,15 +158,68 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
         t.id === tabId ? { ...t, isClosed: false, updatedAt: Date.now() } : t
       );
       saveTabs(newTabs);
+      saveBackup(newTabs);
       return { tabs: newTabs, activeTabId: tabId };
     });
   },
 
+  deleteTab: (tabId: string) => {
+    set((state) => {
+      const newTabs = state.tabs.filter((t) => t.id !== tabId);
+      
+      let newActiveTabId = state.activeTabId;
+      if (state.activeTabId === tabId) {
+        const openTabs = newTabs.filter((t) => !t.isClosed);
+        if (openTabs.length > 0) {
+          newActiveTabId = openTabs[0].id;
+        } else {
+          newActiveTabId = null;
+        }
+      }
+
+      saveTabs(newTabs);
+      saveBackup(newTabs);
+      return {
+        tabs: newTabs,
+        activeTabId: newActiveTabId,
+      };
+    });
+  },
+
   loadFromStorage: async () => {
-    const tabs = await loadTabs();
+    if (get().isLoaded) return;
+    
+    let tabs = [];
+    if (typeof window !== 'undefined') {
+      const backup = localStorage.getItem('scratchpad_tabs_backup');
+      if (backup) {
+        try {
+          tabs = JSON.parse(backup);
+        } catch (e) {
+          console.warn('Failed to parse backup from localStorage', e);
+        }
+      }
+    }
+    
+    if (tabs.length === 0) {
+      tabs = await loadTabs();
+    } else {
+      saveTabs(tabs);
+    }
+    
     set({
       tabs,
       activeTabId: tabs.length > 0 ? tabs[0].id : null,
+      isLoaded: true,
     });
+  },
+
+  flushSave: () => {
+    if (saveTimeout) {
+      clearTimeout(saveTimeout);
+      saveTimeout = null;
+      saveTabs(get().tabs);
+      set({ isDirty: false });
+    }
   },
 }));

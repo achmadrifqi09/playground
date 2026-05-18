@@ -1,13 +1,13 @@
 export type WorkspaceType = 'env' | 'bash' | 'sql' | 'json' | 'notes';
 
 export interface Tab {
-  id: string; // UUID v4
-  label: string; // Nama tab, bisa diedit
-  type: WorkspaceType; // Tipe menentukan syntax highlighting
-  content: string; // Isi editor
-  createdAt: number; // timestamp
-  updatedAt: number; // timestamp
-  isClosed?: boolean; // Soft delete flag
+  id: string;
+  label: string;
+  type: WorkspaceType;
+  content: string;
+  createdAt: number;
+  updatedAt: number;
+  isClosed?: boolean;
 }
 
 export interface ScratchpadState {
