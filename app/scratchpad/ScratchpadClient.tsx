@@ -39,11 +39,7 @@ export default function ScratchpadClient() {
     loadFromStorage();
   }, [loadFromStorage]);
 
-  useEffect(() => {
-    if (isLoaded && tabs.filter(t => !t.isClosed).length === 0) {
-      addTab('env');
-    }
-  }, [isLoaded, tabs, addTab]);
+
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {

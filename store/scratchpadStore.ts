@@ -79,25 +79,15 @@ export const useScratchpadStore = create<ScratchpadStore>((set, get) => ({
       let newTabs;
       let newActiveTabId = state.activeTabId;
 
-      if (openTabs.length === 0) {
-        const newTab: Tab = {
-          id: uuidv4(),
-          label: `Untitled (${targetTab.type})`,
-          type: targetTab.type,
-          content: defaultContent[targetTab.type],
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        };
-        newTabs = state.tabs.map((t) => t.id === tabId ? { ...t, isClosed: true } : t);
-        newTabs.push(newTab);
-        newActiveTabId = newTab.id;
-      } else {
-        newTabs = state.tabs.map((t) => t.id === tabId ? { ...t, isClosed: true } : t);
-        
-        if (state.activeTabId === tabId) {
+      newTabs = state.tabs.map((t) => t.id === tabId ? { ...t, isClosed: true } : t);
+      
+      if (state.activeTabId === tabId) {
+        if (openTabs.length > 0) {
           const index = state.tabs.filter((t) => !t.isClosed).findIndex((t) => t.id === tabId);
           const remainingOpenTabs = state.tabs.filter((t) => !t.isClosed && t.id !== tabId);
           newActiveTabId = remainingOpenTabs[Math.max(0, index - 1)].id;
+        } else {
+          newActiveTabId = null;
         }
       }
 
