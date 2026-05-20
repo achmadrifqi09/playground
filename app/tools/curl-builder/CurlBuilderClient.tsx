@@ -12,16 +12,7 @@ import {
   generateFetchCode,
   generateNodeCode,
 } from '@/lib/utils/curl';
-import {
-  Play,
-  Plus,
-  Trash2,
-  Settings,
-  CheckCircle2,
-  XCircle,
-  Pin,
-  RefreshCw,
-} from 'lucide-react';
+import { Play, Plus, Trash2, Settings, CheckCircle2, XCircle, Pin, RefreshCw } from 'lucide-react';
 import OutputDisplay from '@/components/tools/OutputDisplay';
 import CopyButton from '@/components/tools/CopyButton';
 
@@ -201,8 +192,7 @@ export default function CurlBuilderClient() {
               return updated;
             });
           }
-        } catch (e) {
-        }
+        } catch (e) {}
       }
 
       saveToRecentHistory();
@@ -435,7 +425,7 @@ export default function CurlBuilderClient() {
             </Button>
           </div>
 
-          <div className="border border-border/80 rounded-xl p-4 bg-muted/5 flex gap-3 items-end">
+          <div className="border border-border/80 rounded-xl p-4 bg-card/40 flex gap-3 items-end">
             <div className="flex-1 space-y-2">
               <label className="text-xs font-semibold text-muted-foreground uppercase">
                 Import from cURL Command
@@ -875,7 +865,7 @@ export default function CurlBuilderClient() {
               </div>
 
               {!response ? (
-                <div className="h-[300px] border border-dashed border-border rounded-xl flex items-center justify-center text-xs text-muted-foreground bg-muted/5">
+                <div className="h-[300px] border border-dashed border-border rounded-xl flex items-center justify-center text-xs text-muted-foreground bg-card/40">
                   Send a request to see the HTTP response body, headers, timing, and test validation
                 </div>
               ) : (

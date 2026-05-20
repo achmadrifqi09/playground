@@ -78,7 +78,7 @@
 .bg-grid-fade {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -99;
 
   background-image:
     linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
