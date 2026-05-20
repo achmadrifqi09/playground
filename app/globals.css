@@ -3,29 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --background: 222 47% 8%; /* #0d1117 dark navy */
-  --foreground: 210 40% 98%;
+  --background: 222 18% 10%;
+  --foreground: 210 20% 92%;
 
-  --card: 222 47% 11%;
-  --card-foreground: 210 40% 98%;
+  --card: 222 16% 13%;
+  --card-foreground: 210 20% 92%;
 
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
+  --popover: 222 16% 13%;
+  --popover-foreground: 210 20% 92%;
 
-  --border: 217 33% 17%;
-  --input: 217 33% 17%;
+  --border: 220 14% 20%;
+  --input: 220 14% 20%;
 
-  --primary: 217 91% 60%; /* Blue #3b82f6 */
+  --primary: 217 91% 60%;
   --primary-foreground: 222 47% 8%;
 
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: 220 14% 16%;
+  --secondary-foreground: 210 20% 92%;
 
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 220 14% 16%;
+  --muted-foreground: 215 12% 65%;
 
-  --accent: 217 33% 17%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 220 14% 16%;
+  --accent-foreground: 210 20% 92%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
@@ -37,19 +37,25 @@
 .light {
   --background: 0 0% 100%;
   --foreground: 222 47% 8%;
+
   --card: 0 0% 100%;
   --card-foreground: 222 47% 8%;
 
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 8%;
+
   --border: 214 32% 91%;
   --input: 214 32% 91%;
+
   --primary: 217 91% 60%;
   --primary-foreground: 0 0% 100%;
+
   --secondary: 210 40% 96%;
   --secondary-foreground: 222 47% 8%;
+
   --muted: 210 40% 96%;
   --muted-foreground: 215 16% 47%;
+
   --accent: 210 40% 96%;
   --accent-foreground: 222 47% 8%;
 
@@ -63,7 +69,36 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.bg-grid-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image:
+    linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 0;
+
+  mask-image:
+    repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px),
+    repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px),
+    radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
+
+  -webkit-mask-image:
+    repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px),
+    repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px),
+    radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
+
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
 }

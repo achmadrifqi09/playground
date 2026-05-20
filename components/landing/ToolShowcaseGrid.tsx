@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { TOOLS } from '@/lib/constants/tools';
 import CategoryBadge from '@/components/shared/CategoryBadge';
-import { Terminal, Shield, Lock, Key, Fingerprint, Hash } from 'lucide-react';
+import { Terminal, Shield, Lock, Key, Fingerprint, Hash, RefreshCw, Eye, Globe, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const iconMap: Record<string, React.ElementType> = {
@@ -11,6 +11,10 @@ const iconMap: Record<string, React.ElementType> = {
   Key,
   Fingerprint,
   Hash,
+  RefreshCw,
+  Eye,
+  Globe,
+  Database,
 };
 
 export default function ToolShowcaseGrid() {
