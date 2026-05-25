@@ -42,7 +42,11 @@ interface SavedRequest {
   isPinned?: boolean;
 }
 
-export default function CurlBuilderClient() {
+interface CurlBuilderClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function CurlBuilderClient({ infoSection }: CurlBuilderClientProps) {
   const [url, setUrl] = useState('https://jsonplaceholder.typicode.com/todos/1');
   const [method, setMethod] = useState('GET');
   const [headers, setHeaders] = useState<KeyValuePair[]>([
@@ -315,6 +319,7 @@ export default function CurlBuilderClient() {
       category="utility"
       keywords={['curl builder', 'api playground', 'online postman', 'test api online']}
       maxWidth="max-w-7xl"
+      infoSection={infoSection}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-3 space-y-6">

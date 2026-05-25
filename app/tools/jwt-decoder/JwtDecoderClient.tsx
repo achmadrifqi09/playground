@@ -16,7 +16,11 @@ interface SecurityWarning {
   description: string;
 }
 
-export default function JwtDecoderClient() {
+interface JwtDecoderClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function JwtDecoderClient({ infoSection }: JwtDecoderClientProps) {
   const [mounted, setMounted] = useState(false);
   const [rawInput, setRawInput] = useState('');
   const [extractedToken, setExtractedToken] = useState('');
@@ -274,6 +278,7 @@ export default function JwtDecoderClient() {
       category="security"
       keywords={['jwt decoder', 'jwt inspector', 'decode jwt online', 'verify jwt']}
       maxWidth="max-w-7xl"
+      infoSection={infoSection}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-5 space-y-6">

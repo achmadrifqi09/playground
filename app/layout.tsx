@@ -14,22 +14,8 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s — Playground App',
-    default: 'Playground App — Developer Utility Platform',
-  },
-  description:
-    'Temporary workspace and utility tools for developers, DevOps, and engineers. All run in browser — no data sent to server.',
-  openGraph: {
-    title: 'Playground App — Developer Utility Platform',
-    description: 'Temporary workspace and utility tools for developers, DevOps, and engineers.',
-    url: 'https://playgroundapp.online',
-    siteName: 'Playground App',
-    locale: 'en_US',
-    type: 'website',
-  },
-};
+import { globalMetadata } from '@/constants/metadata';
+export const metadata = globalMetadata;
 
 export default function RootLayout({
   children,

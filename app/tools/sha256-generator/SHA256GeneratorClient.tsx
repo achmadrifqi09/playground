@@ -7,7 +7,11 @@ import CopyButton from '@/components/tools/CopyButton';
 import { Textarea } from '@/components/ui/textarea';
 import { hashSHA256 } from '@/lib/crypto/sha256';
 
-export default function SHA256GeneratorClient() {
+interface SHA256GeneratorClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function SHA256GeneratorClient({ infoSection }: SHA256GeneratorClientProps) {
   const [input, setInput] = useState('');
   const [hash, setHash] = useState('');
 
@@ -30,6 +34,7 @@ export default function SHA256GeneratorClient() {
       description="Generate SHA256 hash instantly."
       category="crypto"
       keywords={['sha256 generator', 'sha256 hash online']}
+      infoSection={infoSection}
     >
       <div className="space-y-6">
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground space-y-4">

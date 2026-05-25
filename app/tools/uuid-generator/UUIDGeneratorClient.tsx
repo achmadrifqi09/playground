@@ -8,7 +8,11 @@ import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { generateMultipleUUIDs } from '@/lib/crypto/uuid';
 
-export default function UUIDGeneratorClient() {
+interface UUIDGeneratorClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function UUIDGeneratorClient({ infoSection }: UUIDGeneratorClientProps) {
   const [count, setCount] = useState(1);
   const [uuids, setUuids] = useState<string[]>([]);
 
@@ -29,6 +33,7 @@ export default function UUIDGeneratorClient() {
       description="Generate UUID v4 instantly."
       category="crypto"
       keywords={['uuid generator online', 'uuid v4 generator']}
+      infoSection={infoSection}
     >
       <div className="space-y-6">
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground space-y-4">

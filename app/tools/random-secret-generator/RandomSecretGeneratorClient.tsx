@@ -10,7 +10,11 @@ import { generateSecret } from '@/lib/crypto/secretGenerator';
 import { SecretFormat } from '@/types/crypto';
 import { Shuffle } from 'lucide-react';
 
-export default function RandomSecretGeneratorClient() {
+interface RandomSecretGeneratorClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function RandomSecretGeneratorClient({ infoSection }: RandomSecretGeneratorClientProps) {
   const [format, setFormat] = useState<SecretFormat>('base64');
   const [bytes, setBytes] = useState(32);
   const [secret, setSecret] = useState('');
@@ -30,12 +34,11 @@ export default function RandomSecretGeneratorClient() {
       description="Generate secure random strings based on crypto."
       category="security"
       keywords={['random secret generator', 'crypto random generator', 'base64 secret generator']}
+      infoSection={infoSection}
     >
       <div className="space-y-6">
-        {}
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground">
           <div className="space-y-4">
-            {}
             <div className="space-y-2">
               <label className="text-sm font-medium">Output Format</label>
               <ToggleGroup type="single" value={format} onValueChange={(val) => val && setFormat(val as SecretFormat)}>
@@ -44,7 +47,6 @@ export default function RandomSecretGeneratorClient() {
               </ToggleGroup>
             </div>
 
-            {}
             <div className="space-y-2">
               <label className="text-sm font-medium">Size</label>
               <ToggleGroup type="single" value={bytes.toString()} onValueChange={(val) => val && setBytes(parseInt(val))}>
@@ -62,7 +64,6 @@ export default function RandomSecretGeneratorClient() {
           </div>
         </div>
 
-        {}
         <div className="border border-border rounded-lg p-6 bg-card text-card-foreground">
           <div className="space-y-4">
             <div className="flex justify-between items-center">

@@ -8,7 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeftRight, RefreshCw } from 'lucide-react';
 import CopyButton from '@/components/tools/CopyButton';
 
-export default function JsonPhpConverterClient() {
+interface JsonPhpConverterClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function JsonPhpConverterClient({ infoSection }: JsonPhpConverterClientProps) {
   const [mode, setMode] = useState<'json-to-php' | 'php-to-json'>('json-to-php');
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -225,6 +229,7 @@ export default function JsonPhpConverterClient() {
       category="utility"
       keywords={['json to php array', 'php array to json', 'php array converter']}
       maxWidth="max-w-7xl"
+      infoSection={infoSection}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">

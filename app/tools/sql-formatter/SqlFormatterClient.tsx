@@ -10,7 +10,11 @@ import { ShieldAlert, AlertTriangle, Layers, Database, FileText, CheckCircle2, C
 import OutputDisplay from '@/components/tools/OutputDisplay';
 import CopyButton from '@/components/tools/CopyButton';
 
-export default function SqlFormatterClient() {
+interface SqlFormatterClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function SqlFormatterClient({ infoSection }: SqlFormatterClientProps) {
   const [dialect, setDialect] = useState('mysql');
   const [input, setInput] = useState("SELECT u.id, u.name, o.total, o.created_at FROM users u LEFT JOIN orders o ON u.id = o.user_id WHERE o.total > 100 AND u.status = 'active'");
   const [output, setOutput] = useState('');
@@ -67,6 +71,7 @@ export default function SqlFormatterClient() {
       category="utility"
       keywords={['sql formatter', 'sql query analyzer', 'beautify sql', 'minify sql']}
       maxWidth="max-w-7xl"
+      infoSection={infoSection}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-5 space-y-6">

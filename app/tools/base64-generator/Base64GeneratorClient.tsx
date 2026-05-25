@@ -10,7 +10,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { generateRandomBase64, encodeToBase64, decodeFromBase64 } from '@/lib/crypto/base64';
 
-export default function Base64GeneratorClient() {
+interface Base64GeneratorClientProps {
+  infoSection?: React.ReactNode;
+}
+
+export default function Base64GeneratorClient({ infoSection }: Base64GeneratorClientProps) {
   const [bytes, setBytes] = useState(32);
   const [generatedBase64, setGeneratedBase64] = useState('');
 
@@ -51,6 +55,7 @@ export default function Base64GeneratorClient() {
       description="Generate random base64 strings or encode/decode text."
       category="crypto"
       keywords={['base64 generator', 'random base64 online', 'base64 encode decode']}
+      infoSection={infoSection}
     >
       <Tabs defaultValue="generate" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
@@ -58,7 +63,6 @@ export default function Base64GeneratorClient() {
           <TabsTrigger value="encode-decode">Encode / Decode</TabsTrigger>
         </TabsList>
 
-        {}
         <TabsContent value="generate" className="space-y-6 mt-4">
           <div className="border border-border rounded-lg p-6 bg-card text-card-foreground space-y-4">
             <div className="space-y-2">
@@ -87,7 +91,6 @@ export default function Base64GeneratorClient() {
           )}
         </TabsContent>
 
-        {}
         <TabsContent value="encode-decode" className="space-y-6 mt-4">
           <div className="border border-border rounded-lg p-6 bg-card text-card-foreground space-y-4">
             <div className="space-y-2">
